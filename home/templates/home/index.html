@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>플래닛 패션</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  <header class="header sticky sticky--top js-header">
+  <div class="grid">
+    <nav class="navigation">
+      <ul class="navigation__list navigation__list--inline">
+        <li class="navigation__item"><a href="/" class="navigation__link navigation__link--is-active">Home</a></li>
+        <li class="navigation__item"><a href="/about/" class="navigation__link">About Us</a></li>
+        <li class="navigation__item"><a href="#" class="navigation__link">Products</a></li>
+        <li class="navigation__item"><a href="#" class="navigation__link">Cart</a></li>
+        <li class="navigation__item"><a href="#" class="navigation__link">login</a></li>
+      </ul>
+    </nav>
+  </div>
+  </header>
+
+  <main class="main">
+    <div class="grid">
+      <img src="{% static 'img/image.jpg' %}" alt="환경오염사진" class="img"> <br>
+      <h1>Planet Fashion</h1>
+      <p> 패션 산업이 환경에 미치는 영향을 아십니까?</p>
+
+    </div>
+  </main>
+
+  <script src="https://cdn.skypack.dev/lodash@4/throttle"></script>
+    <script>
+        function onScroll() {
+            if (window.pageYOffset) {
+                $$header.classList.add("is-active");
+            } else {
+                $$header.classList.remove("is-active");
+            }
+        }
+
+        const $$header = document.querySelector(".js-header");
+
+        window.addEventListener("scroll", _.throttle(onScroll, 300));
+    </script>
+</body>
+</html>
