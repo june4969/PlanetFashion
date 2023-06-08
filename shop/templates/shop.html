@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>플래닛 패션</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+    <style>
+      .heart-icon {
+        color: gray; /* 아이콘의 색상을 회색으로 설정 */
+        cursor: pointer;
+        margin-top: 13px;
+        margin-left: 98%;
+      }
+
+      .heart-icon.filled {
+        color: red; /* 클릭한 경우 하트를 채움 */
+      }
+    </style>
+
+    <script>
+      // JavaScript 코드
+      // 페이지가 로드되었을 때 실행되는 함수
+      window.addEventListener('DOMContentLoaded', function() {
+        var heartIcons = document.getElementsByClassName('heart-icon');
+
+        // 각 하트 아이콘에 클릭 이벤트를 추가
+        for (var i = 0; i < heartIcons.length; i++) {
+          var heartIcon = heartIcons[i];
+          heartIcon.addEventListener('click', toggleHeart);
+          restoreHeartState(heartIcon); // 상태 복원
+        }
+
+        // 클릭 시 하트 아이콘의 상태 변경
+        function toggleHeart() {
+          this.classList.toggle('filled'); // filled 클래스를 토글
+          saveHeartState(this); // 상태 저장
+        }
+
+        // 상태 복원
+        function restoreHeartState(heartIcon) {
+          var productId = heartIcon.dataset.productId;
+          var heartState = localStorage.getItem('heart-state-' + productId);
+          if (heartState === 'filled') {
+            heartIcon.classList.add('filled');
+          }
+        }
+
+        // 상태 저장
+        function saveHeartState(heartIcon) {
+          var productId = heartIcon.dataset.productId;
+          var heartState = heartIcon.classList.contains('filled') ? 'filled' : '';
+          localStorage.setItem('heart-state-' + productId, heartState);
+        }
+      });
+    </script>
+
+
+
+</head>
+<body>
+  <header class="header sticky sticky--top js-header">
+    <div class="grid">
+      <nav class="navigation">
+        <ul class="navigation__list navigation__list--inline">
+          <li class="navigation__item"><a href="/" class="navigation__link">Home</a></li>
+          <li class="navigation__item"><a href="/about/" class="navigation__link">About Us</a></li>
+          <li class="navigation__item"><a href="{% url 'shop:shop' %}" class="navigation__link navigation__link--is-active">Brands</a></li>
+          <li class="navigation__item"><a href="{% url 'mypage:mypage' %}" class="navigation__link">My</a></li>
+          <li class="navigation__item"><a href="{% url 'accounts:login' %}" class="navigation__link">login</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+    <div class="shop-list-container">
+      {% for product in products %}
+        <div class="shop-list">
+          <img src="{{ product.image.url }}"> <span class="heart-icon heart-icon-{{ product.id }}" data-product-id="{{ product.id }}">&#10084;</span>
+          <div>
+            <h2>{{ product.name }}</h2>
+            <a href="{{ product.link }}" target="_blank">{{ product.link }}</a>
+            <p>{{ product.description }}</p>
+          </div>
+
+        </div>
+      {% endfor %}
+    </div>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
