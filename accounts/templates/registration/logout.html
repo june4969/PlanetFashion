@@ -4,6 +4,33 @@
 <head>
     <title>플래닛 패션</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <style>
+      .panel {
+          margin-top: 10%;
+          padding: 30px;
+          margin-left: auto;
+          margin-right: auto;
+          border-radius: 10px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          width: 400px; /* 가로 크기 조정 */
+      }
+      .alert {
+          margin-bottom: 20px;
+          text-align: left; /* 왼쪽 정렬 */
+      }
+      .btn-primary {
+          color: black;
+          border: 1px;
+          width: auto; /* 가로 크기 조정 */
+          height: auto; /* 세로 크기 조정 */
+          float: right; /* 오른쪽 정렬 */
+          margin-top: 1px; /* 버튼 아래에 마진 추가 */
+          margin-top: 1px; /* 버튼 아래에 마진 추가 */
+      }
+      .btn-primary:hover {
+          color: #007bff;
+      }
+    </style>
 </head>
 <body>
   <header class="header sticky sticky--top js-header">
@@ -14,25 +41,29 @@
         <li class="navigation__item"><a href="/about/" class="navigation__link">About Us</a></li>
         <li class="navigation__item"><a href="{% url 'shop:shop' %}" class="navigation__link">Brands</a></li>
         <li class="navigation__item"><a href="{% url 'mypage:mypage' %}" class="navigation__link">My</a></li>
-        <li class="navigation__item"><a href="#" class="navigation__link navigation__link--is-active">login</a></li>
+        <li class="navigation__item"><a href="/login/" class="navigation__link navigation__link--is-active">
+            {% if user.is_authenticated %}
+              <a class="navigation__link" href="{% url 'accounts:logout' %}">Logout</a>
+            {% else %}
+              <a class="navigation__link" href="{% url 'accounts:login' %}">Login</a>
+            {% endif %}
+        </a>
+        </li>
       </ul>
     </nav>
   </div>
   </header>
 
-
-  {% block title %}- Logout{% endblock %}
     {% block content %}
         <div class="row">
             <div class="col-md-2"></div>
             <div class="col-md-8 panel panel-default">
-                <div class="alert alert-info">You have been successfully logged out.</div>
-                <a class="btn btn-primary" href="{% url 'login' %}">Click to Login</a>
+                <div class="alert alert-info">로그아웃 되셨습니다. <br>이용해주셔서 감사합니다.</div>
+                <a class="btn btn-primary" href="{% url 'accounts:login' %}">로그인</a>
             </div>
             <div class="col-md-2"></div>
         </div>
     {% endblock %}
-
 
 </body>
 </html>
