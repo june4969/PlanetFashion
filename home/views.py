@@ -7,3 +7,16 @@ def index(request):
 
 def about(request):
     return render(request, 'home/about.html')
+
+
+def shop(request):
+    return render(request, 'shop/shop.html')
+
+def mypage(request):
+    return  render(request, 'mypage/my_page.html')
+
+
+def login(request):
+    return render(request, 'accounts/login.html')
+
+
