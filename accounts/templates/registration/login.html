@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>플래닛 패션</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  <header class="header sticky sticky--top js-header">
+  <div class="grid">
+    <nav class="navigation">
+      <ul class="navigation__list navigation__list--inline">
+        <li class="navigation__item"><a href="/" class="navigation__link">Home</a></li>
+        <li class="navigation__item"><a href="/about/" class="navigation__link">About Us</a></li>
+        <li class="navigation__item"><a href="{% url 'shop:shop' %}" class="navigation__link">Brands</a></li>
+        <li class="navigation__item"><a href="{% url 'mypage:mypage' %}" class="navigation__link">My</a></li>
+        <li class="navigation__item"><a href="#" class="navigation__link navigation__link--is-active">login</a></li>
+      </ul>
+    </nav>
+  </div>
+  </header>
+
+  {% block content %}
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8 panel panel-default">
+      <div class="alert alert-info">Please enter your login information.</div>
+      <form action="" method="post">
+        {{form.as_p}}
+        {% csrf_token %}
+        <input class="btn btn-primary" type="submit" value="Login">
+      </form>
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+  {% endblock %}
+
+
+</body>
+</html>
