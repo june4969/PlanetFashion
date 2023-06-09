@@ -35,13 +35,26 @@
   </header>
 
   <div id="mypage-container">
-  {% for mypage_item in mypage_items %}
-    <div class="mypage-item">
-      <img src="{{ mypage_item.image.url }}">
-      <p>{{ mypage_item.name }}</p>
+    <h2>리뷰 작성</h2>
+    <form method="POST" action="{% url 'mypage:add_review' %}">
+      {% csrf_token %}
+      <textarea name="review" placeholder="리뷰 작성"></textarea>
+      <button type="submit">작성</button>
+    </form>
+
+    <div class="reviews-container">
+      <h2>리뷰 목록</h2>
+      {% for review in reviews %}
+        <div class="review-item">
+          <p>작성자: {{ review.author }}</p>
+          <p>리뷰 내용: {{ review.content }}</p>
+          <p>작성일: {{ review.created_at }}</p>
+        </div>
+      {% empty %}
+        <p>작성된 리뷰가 없습니다.</p>
+      {% endfor %}
     </div>
-  {% endfor %}
-</div>
+  </div>
 
 
 </body>
