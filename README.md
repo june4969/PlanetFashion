@@ -24,11 +24,10 @@
             <th style={thStyle}>배포</th>
             <td style={tdStyle}>Pythonanywhere로 배포 예정</td>
           </tr>
-          <tr>
-            <th style={thStyle}>소스 코드</th>
-            <td style={tdStyle}><a href='https://github.com/june4969/PlanetFashion' target="_blank">깃허브 바로가기</a></td>
-          </tr>
+
         </tbody>
       </table>
 <br><br>
+
+<br>
 ## 업데이트
