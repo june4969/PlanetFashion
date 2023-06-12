@@ -121,3 +121,52 @@ p {
   background-color: #fff;
 }
 
+/* shop.css */
+
+.shop-list-container {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start; /* 왼쪽 정렬 */
+
+
+}
+
+.shop-list {
+  width: 70%; /* 사진, 이름, 설명이 한 줄에 나타나도록 너비 조정 */
+  height: auto; /* 높이 자동 조정 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.shop-list img {
+  width: 100%;
+  height: auto;
+}
+
+.shop-list h2 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 2px;
+}
+
+.shop-list p {
+  font-size: 14px;
+  margin-bottom: 3px;
+}
+
+
+
+.shop-list-container .shop-list {
+  width: 33%; /* 3개씩 가로로 배열되도록 너비 조정 */
+  margin-left: 12%;
+  margin-bottom: 1px; /* 아래쪽 간격을 좁히기 */
+}
+
+
+
+
+
