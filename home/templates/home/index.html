@@ -4,51 +4,147 @@
 <head>
     <title>플래닛 패션</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-</head>
-<body>
-  <header class="header sticky sticky--top js-header">
-  <div class="grid">
-    <nav class="navigation">
-      <ul class="navigation__list navigation__list--inline">
-        <li class="navigation__item"><a href="/" class="navigation__link navigation__link--is-active">Home</a></li>
-        <li class="navigation__item"><a href="/about/" class="navigation__link">About Us</a></li>
-        <li class="navigation__item"><a href="{% url 'shop:shop' %}" class="navigation__link">Brands</a></li>
-        <li class="navigation__item"><a href="{% url 'mypage:mypage' %}" class="navigation__link">My</a></li>
-        <li class="navigation__item"><a href="/login/" class="navigation__link">
-            {% if user.is_authenticated %}
-              <a class="navigation__link" href="{% url 'accounts:logout' %}">Logout</a>
-            {% else %}
-              <a class="navigation__link" href="{% url 'accounts:login' %}">Login</a>
-            {% endif %}
-        </a>
-        </li>
-      </ul>
-    </nav>
-  </div>
-  </header>
-
-  <main class="main">
-    <div class="grid">
-      <img src="{% static 'img/image.jpg' %}" alt="환경오염사진" class="img"> <br>
-      <h1>Planet Fashion</h1>
-      <p> 패션 산업이 환경에 미치는 영향을 아십니까?</p>
-
-    </div>
-  </main>
-
-  <script src="https://cdn.skypack.dev/lodash@4/throttle"></script>
-    <script>
-        function onScroll() {
-            if (window.pageYOffset) {
-                $$header.classList.add("is-active");
-            } else {
-                $$header.classList.remove("is-active");
-            }
+    <style>
+        img {
+            width: 760px;
+            height: 393px;
         }
 
-        const $$header = document.querySelector(".js-header");
+        .slideshow-container {
+            position: relative;
+            margin: auto;
+        }
 
-        window.addEventListener("scroll", _.throttle(onScroll, 300));
+        .slide {
+            display: none;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        .prev,
+        .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 24px;
+            font-weight: bold;
+            padding: 8px 16px;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .prev {
+            left: 0;
+        }
+
+        .next {
+            right: 0;
+            margin-right: 3px;
+        }
+    </style>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load("current", {packages:["corechart"]});
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['국가', '수출액 (백만 달러)'],
+                ['미국', 750],
+                ['영국', 496],
+                ['독일', 379],
+                ['중국', 372],
+                ['한국', 312]
+            ]);
+
+            var options = {
+                title: '중고 의류 수출액 순위 (단위- 100만 달러)',
+                pieHole: 0.4
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+            chart.draw(data, options);
+        }
+
+        var slideIndex = 0;
+        var slides = document.getElementsByClassName("slide");
+
+        function showSlide(n) {
+            if (n >= slides.length) {
+                slideIndex = 0;
+            } else if (n < 0) {
+                slideIndex = slides.length - 1;
+            }
+
+            for (var i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+
+            slides[slideIndex].style.display = "block";
+        }
+
+        function nextSlide() {
+            slideIndex++;
+            showSlide(slideIndex);
+        }
+
+        function prevSlide() {
+            showSlide(slideIndex - 1);
+        }
+
+        // Show the first slide initially
+        showSlide(0);
     </script>
+</head>
+<body>
+<header class="header sticky sticky--top js-header">
+    <div class="grid">
+        <nav class="navigation">
+            <ul class="navigation__list navigation__list--inline">
+                <li class="navigation__item"><a href="/" class="navigation__link navigation__link--is-active">Home</a></li>
+                <li class="navigation__item"><a href="/about/" class="navigation__link">About Us</a></li>
+                <li class="navigation__item"><a href="{% url 'shop:shop' %}" class="navigation__link">Brands</a></li>
+                <li class="navigation__item"><a href="{% url 'mypage:mypage' %}" class="navigation__link">My</a></li>
+                <li class="navigation__item">
+                    <a href="/login/" class="navigation__link">
+                        {% if user.is_authenticated %}
+                        <a class="navigation__link" href="{% url 'accounts:logout' %}">Logout</a>
+                        {% else %}
+                        <a class="navigation__link" href="{% url 'accounts:login' %}">Login</a>
+                        {% endif %}
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main class="main">
+    <div class="grid">
+        <div class="slideshow-container">
+            <div class="slide">
+                <img src="{% static 'img/img1.jpg' %}" alt="슬라이드 1">
+            </div>
+            <div class="slide active">
+                <img src="{% static 'img/img2.jpg' %}" alt="슬라이드 2">
+            </div>
+
+            <div class="slide">
+                <img src="{% static 'img/img4.jpg' %}" alt="슬라이드 4">
+            </div>
+
+            <a class="prev" onclick="prevSlide()">&#10094;</a>
+            <a class="next" onclick="nextSlide()">&#10095;</a>
+        </div>
+
+        <h2>우리가 쓰고 버린 옷은 어디로 갈까?</h2>
+        <p>한국에서 더 이상 입지 않는 옷을 처리할 방법은 두 가지뿐입니다. 일반쓰레기로 배출해 소각·매립하거나, 의류수거함에 넣거나. 그러나 의류를 재사용할 거라 기대하는 의류수거함 역시 문제가 많습니다.</p>
+        <div id="donutchart" style="width: 900px; height: 500px;"></div>
+        <br><br>수거된 옷들의 95%가 개발도상국으로 수출됩니다. 우리나라의 헌 옷이 수출되는 국가는 인도, 캄포디아, 필리핀, 방글라데시, 파키스탄, 이라크, 인도네시아. 탄자니아, 케냐, 가나 등과 같은 개발도상국이다.
+        'OEC'에 따르면 2020년 기준 한국의 헌 옷 수출량은 세계 5위로, 미국·중국·영국·독일 다음입니다. <br><br>수출된 옷 대부분은 썩지 않고 남아 심각한 환경문제를 일으킨다. 드넓은 초원에서 풀을 뜯어 먹어야 할 소들이 버려진 폐섬유를 먹고, 식수로 사용되던 아프리카 가나의 오다우강은 병을 일으키는 오염된 강이 되었습니다.
+        <br><br>일반쓰레기로 배출하는 건 더 문제입니다. 배출 원단에 대한 규정조차 없습니다. 합성섬유로 이루어진 의류가 많은데, 일반쓰레기와 마찬가지로 소각합니다. 일반 가정에서는 종량제 봉투에 넣어 버리고, 동대문 등 의류업체가 많은 특정 지역에는 지자체와 협약을 맺어 의류 폐기물만 따로 소각장으로 가져오기도 합니다.</p>
+    </div>
+</main>
 </body>
 </html>
