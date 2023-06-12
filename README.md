@@ -24,5 +24,5 @@
             <td style={tdStyle}>Pythonanywhere로 배포 예정</td>
           </tr>
       </table>
-<br><br>
+
 ## 업데이트
