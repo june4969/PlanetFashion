@@ -122,15 +122,12 @@ p {
 }
 
 /* shop.css */
-
 .shop-list-container {
   display: flex;
   justify-content: space-between;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start; /* 왼쪽 정렬 */
-
-
 }
 
 .shop-list {
@@ -158,15 +155,58 @@ p {
   margin-bottom: 3px;
 }
 
-
-
+.shop-list a {
+  color: black; /* 링크의 색상을 검정으로 설정합니다 */
+  text-decoration: none;
+}
 .shop-list-container .shop-list {
   width: 33%; /* 3개씩 가로로 배열되도록 너비 조정 */
   margin-left: 12%;
   margin-bottom: 1px; /* 아래쪽 간격을 좁히기 */
 }
 
+/* article.css */
+
+.article-list-container {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start; /* 왼쪽 정렬 */
+
+}
+
+
+.article-item a {
+  color: black;
+}
+
+
+.article-item {
+  width: 50%; /* 사진, 이름, 설명이 한 줄에 나타나도록 너비 조정 */
+  height: auto; /* 높이 자동 조정 */
+  flex-direction: column;
+  align-items: baseline;
+  margin-top: 60px;
+  font-size: 12px;
+}
 
 
 
 
+.article-item img {
+  width: 75%;
+  height: auto;
+  transition: transform 0.3s ease; /* 확대 효과를 부드럽게 적용하기 위한 transition 속성 */
+}
+
+.article-list-container .article-item {
+  width: 22%; /* 3개씩 가로로 배열되도록 너비 조정 */
+  margin-left: 10%;
+  margin-bottom: 2px; /* 아래쪽 간격을 좁히기 */
+}
+
+
+.article-item img:hover {
+  transform: scale(1.1); /* 마우스 호버 시 이미지를 1.1배 확대 */
+}

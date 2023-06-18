@@ -12,8 +12,8 @@ def about(request):
 def shop(request):
     return render(request, 'shop/shop.html')
 
-def mypage(request):
-    return  render(request, 'mypage/my_page.html')
+def article(request):
+    return render(request, 'article/article.html')
 
 
 def login(request):

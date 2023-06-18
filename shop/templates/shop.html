@@ -66,7 +66,7 @@
           <li class="navigation__item"><a href="/" class="navigation__link">Home</a></li>
           <li class="navigation__item"><a href="/about/" class="navigation__link">About Us</a></li>
           <li class="navigation__item"><a href="{% url 'shop:shop' %}" class="navigation__link navigation__link--is-active">Brands</a></li>
-          <li class="navigation__item"><a href="{% url 'mypage:mypage' %}" class="navigation__link">My</a></li>
+          <li class="navigation__item"><a href="{% url 'article:article' %}" class="navigation__link">Article</a></li>
           <li class="navigation__item"><a href="{% url 'accounts:login' %}" class="navigation__link">
             {% if user.is_authenticated %}
               <a class="navigation__link" href="{% url 'accounts:logout' %}">Logout</a>
@@ -85,7 +85,7 @@
           <img src="{{ product.image.url }}"> <span class="heart-icon heart-icon-{{ product.id }}" data-product-id="{{ product.id }}">&#10084;</span>
           <div>
             <h2>{{ product.name }}</h2>
-            <a href="{{ product.link }}" target="_blank">{{ product.link }}</a>
+            <a href="{{ product.link }}" target="_blank">바로가기&gt;&gt;</a>
             <p>{{ product.description }}</p>
           </div>
 

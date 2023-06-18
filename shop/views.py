@@ -1,9 +1,6 @@
-
 from .models import Category
 from django.shortcuts import render
 from .models import Product
-
-
 
 
 def shop(request):
@@ -13,5 +10,3 @@ def shop(request):
 
 
 
-def mypage(request):
-    return render(request, 'my_page.html')

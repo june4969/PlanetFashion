@@ -37,8 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'home',
     'shop',
-    'mypage',
-    'accounts'
+    'accounts',
+    'article',
 
 
 
@@ -135,3 +135,9 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 
 LOGIN_REDIRECT_URL = '/' # 목록 화면으로 이동
+
+
+
+DEBUG = True # False
+
+ALLOWED_HOSTS = ['*']
